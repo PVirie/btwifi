@@ -26,5 +26,5 @@ A bluetooth interface for setting wifi on embedding devices.
     ```
 
     - `sudo systemctl daemon-reload`
-    - `sudo systemctl enable myble.service`
-    - `sudo systemctl start myble.service`
+    - `sudo systemctl enable btwifi.service`
+    - `sudo systemctl start btwifi.service`
