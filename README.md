@@ -18,6 +18,7 @@ A bluetooth interface for setting wifi on embedding device.
         [Service]
         ExecStart=/usr/bin/python3 /path/to/your/ble_script.py
         Restart=always
+        User=root
         Environment=PYTHONUNBUFFERED=1
 
         [Install]
