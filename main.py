@@ -11,9 +11,12 @@ import os
 import sys
 import subprocess
 import signal
-
+from loguru import logger
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
+
+logger.add(os.path.join(dir_path, "log.log"))
+
 
 def read_config():
     import json
@@ -63,9 +66,12 @@ def write_request(
     str_value = value.decode("utf-8")
 
     if str_characteristic == config_data["nssid_characteristic_uuid"]:
+        logger.info("Received ssid: {}".format(str_value))
         temp_ssid = str_value
     elif str_characteristic == config_data["ncred_characteristic_uuid"]:
+        logger.info("Received password for ssid: {}".format(temp_ssid))
         if temp_ssid is not None:
+            logger.info("Connecting to wifi...")
             connect_to_wifi(temp_ssid, str_value)
 
 
@@ -108,6 +114,7 @@ async def init_bluetooth():
         GATTAttributePermissions.writeable)
 
     if not await server.start():
+        logger.error("Bluetooth failed to start.")
         raise Exception("Bluetooth failed to start.")
 
 
@@ -117,6 +124,7 @@ async def sub_worker():
     await init_bluetooth()
     while True:
         if order_reset:
+            logger.info("Stopping bluetooth...")
             await server.stop()
             await asyncio.sleep(10)
             break
