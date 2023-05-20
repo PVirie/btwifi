@@ -6,7 +6,7 @@ A bluetooth interface for setting wifi on embedding devices.
 
 1. Install python3
  <!--  mark down link to `` -->
-2. Install bless library for python3 ( `pip3 install bless` )[https://github.com/kevincar/bless]
+2. Install bless library for python3 (`sudo pip3 install bless`)[https://github.com/kevincar/bless]
 3. (Optional) Set up Systemd service for the script
 
     - `sudo nano /etc/systemd/system/btwifi.service`
@@ -16,7 +16,7 @@ A bluetooth interface for setting wifi on embedding devices.
         Description=btwifi
 
         [Service]
-        ExecStart=/usr/bin/python3 /path/to/your/ble_script.py
+        ExecStart=/usr/bin/python3 /<path-to-this-directory>/main.py
         Restart=always
         User=root
         Environment=PYTHONUNBUFFERED=1
